@@ -1,0 +1,33 @@
+{
+  "question": "¿Qué es un RAG como sistema?",
+  "system_answer": "Un RAG como sistema es un enfoque de generación de respuestas que optimiza la salida de un modelo de lenguaje de gran tamaño al hacer referencia a una base de conocimientos autorizada fuera de los orígenes de datos de entrenamiento antes de generar una respuesta.",
+  "chunks": [
+    {
+      "document": "rios**\n\nLa RAG le permite al LLM presentar información precisa con la atribución de la fuente. La salida puede incluir citas o referencias a fuentes. Los usuarios también pueden buscar ellos mismos los documentos de origen si necesitan más aclaraciones o más detalles. Esto puede aumentar la confianza en su solución de IA generativa.\n\n### **Más control para los desarrolladores**\n\nCon la RAG, los desarrolladores pueden probar y mejorar sus aplicaciones de chat de manera más eficiente. Pueden contr",
+      "distance": 0.4230892062187195,
+      "metadata": {
+        "file_name": "FAQ.txt",
+        "total_chunks": 22,
+        "chunk_index": 10
+      }
+    },
+    {
+      "document": "## ¿Qué es la generación aumentada por recuperación?\n\nLa generación aumentada por recuperación (RAG) es el proceso de optimización de la salida de un modelo de lenguaje de gran tamaño, de modo que haga referencia a una base de conocimientos autorizada fuera de los orígenes de datos de entrenamiento antes de generar una respuesta. Los modelos de lenguaje de gran tamaño (LLM) se entrenan con volúmenes de datos amplios y usan miles de millones de parámetros para generar resultados originales en tar",
+      "distance": 0.45876985788345337,
+      "metadata": {
+        "chunk_index": 0,
+        "total_chunks": 22,
+        "file_name": "FAQ.txt"
+      }
+    },
+    {
+      "document": "ma terminología para hablar de cosas diferentes.\n\nPuede pensar en el modelo de lenguaje de gran tamaño como un nuevo empleado demasiado entusiasta que se niega a mantenerse informado de los acontecimientos actuales, pero que siempre responde a todas las preguntas con absoluta confianza. Por desgracia, esta actitud puede afectar de manera negativa a la confianza de los usuarios, lo cual no es algo que quiera que emulen sus chatbots.\n\nLa RAG es un enfoque para resolver algunos de estos desafíos. R",
+      "distance": 0.460299551486969,
+      "metadata": {
+        "file_name": "FAQ.txt",
+        "chunk_index": 5,
+        "total_chunks": 22
+      }
+    }
+  ]
+}
