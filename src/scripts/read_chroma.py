@@ -1,39 +1,36 @@
-import chromadb
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+from src.config.settings import Settings
+from pathlib import Path
 
 
-def main() -> None:
-    client = chromadb.PersistentClient(
-        path="storage/chroma"
-    )
 
-    collection = client.get_collection(
-        name="documents"
-    )
+embeddings = OpenAIEmbeddings(model=Settings.EMBEDDING_MODEL)
 
-    results = collection.get()
+# Cargar el vector store persistido
+vector_store = Chroma(
+    persist_directory=str(Path("storage/chroma")),
+    embedding_function=embeddings,
+    collection_name="default",  # solo hay uno y le puse default
+)
 
-    print(f"Documentos encontrados: {len(results['ids'])}")
+# Obtener todos los documentos almacenados
+data = vector_store.get()
+print(data)
+
+ids = data["ids"]
+documents = data["documents"]
+metadatas = data["metadatas"]
+
+print(f"Total de chunks: {len(ids)}\n")
+
+for i, (doc_id, doc, metadata) in enumerate(
+    zip(ids, documents, metadatas), start=1
+):
+    print("=" * 80)
+    print(f"Chunk #{i}")
+    print(f"ID: {doc_id}")
+    print(f"Metadata: {metadata}")
+    print("Contenido:")
+    print(doc)
     print()
-
-    metadatas = results.get("metadatas")
-    documents = results.get("documents")
-
-    for i in range(len(results["ids"])):
-        print("=" * 80)
-
-        print(f"ID: {results['ids'][i]}")
-
-        if metadatas is not None and i < len(metadatas):
-            print(
-                f"Metadata: {metadatas[i]}"
-            )
-
-        if documents is not None and i < len(documents):
-            print(
-                f"Documento:\n{documents[i]}"
-            )
-
-        print()
-
-if __name__ == "__main__":
-    main()
