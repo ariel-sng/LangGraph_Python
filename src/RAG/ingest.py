@@ -6,6 +6,7 @@ from src.config.settings import Settings
 from langchain_text_splitters import CharacterTextSplitter, RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from langchain_chroma import Chroma
+from langchain_community.document_loaders import TextLoader
 
 def _load_markdown_sections(file_path: Path) -> List[Dict[str, str]]:
     text = file_path.read_text(encoding="utf-8")
@@ -67,24 +68,21 @@ def ingest_md(
 
     embeddings = OpenAIEmbeddings(model=Settings.EMBEDDING_MODEL)
 
-    sections = _load_markdown_sections(md_path)
+    loader = TextLoader(str(md_path), encoding="utf-8")
+    docs = loader.load()
 
-    texts: List[str] = []
-    metadatas: List[Dict[str, str]] = []
 
-    for sec in sections:
-        section_title = sec.get("section", "root")
-        section_text = sec.get("text", "").strip()
-        if not section_text:
-            continue
+    chunks = _chunk_text(
+        docs[0].page_content,
+        method=chunk_method,
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+    )
 
-        chunks = _chunk_text(section_text, method=chunk_method, chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-        for i, c in enumerate(chunks):
-            texts.append(c)
-            metadatas.append({"section": section_title, "source": str(md_path), "chunk_index": str(i)})
-
+    texts = chunks
+    
+    metadatas = [{"source": md_path.name} for _ in chunks]
     # persist to Chroma via langchain wrapper
-    print(len(texts))
     chroma = Chroma.from_texts(
         texts,
         embeddings,
