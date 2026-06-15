@@ -1,4 +1,3 @@
-from .rag_agent import rag_retriever_node
 from .unknown import unknown_node
 from .legal import legal_node
 from .tech import tech_node
@@ -15,7 +14,6 @@ NODES = {
 }
 
 __all__ = [
-    "rag_retriever_node",
     "unknown_node",
     "legal_node",
     "tech_node",
