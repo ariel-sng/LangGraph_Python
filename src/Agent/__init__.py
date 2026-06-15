@@ -5,6 +5,7 @@ from .finance import finance_node
 from .hr import hr_node
 from .orchestrator import orchestrator_node, router
 from .answer import answer_node
+from .evaluator import evaluate
 
 NODES_RAG = {
     "legal": legal_node,

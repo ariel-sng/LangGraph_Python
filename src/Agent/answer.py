@@ -39,9 +39,6 @@ def answer_node(state: AgentState) -> dict[str, Any]:
     ''' Generador de respuesta final del grafo'''
     
     context = _get_context(state)
-    print("-"*80)
-    print(f"Contexto: {context}")
-    print("-"*80)
 
     agents = ", ".join(
         route.value
