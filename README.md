@@ -35,11 +35,14 @@ uv sync
 Crear un archivo `.env` en la raíz con estas variables:
 
 ```env
-OPENAI_API_KEY=tu_clave_openai_aqui
+OPENAI_API_KEY=tu_clave_openai_aca
 EMBEDDING_MODEL=text-embedding-3-small
 OPENAI_HIGH_MODEL=gpt-5
 OPENAI_LOW_MODEL=gpt-5-nano
 MAX_PROMPT_TOKENS=4096
+LANGFUSE_SECRET_KEY=tu_clave_secreta_langfuse_aca
+LANGFUSE_PUBLIC_KEY=tu_clave_publica_langfuse_aca
+LANGFUSE_BASE_URL="https://us.cloud.langfuse.com"
 ```
 
 ---
