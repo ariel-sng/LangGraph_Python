@@ -49,3 +49,58 @@ El rendimiento y la capacidad de razonamiento de un Gran Modelo de Lenguaje no s
 ## 5.2 Arquitectura de Sistemas Agenciales y Bucles de Razonamiento
 
 Los Agentes Cognitivos Autónomos representan la transición de los LLMs como meros motores de texto predictivo a entidades de software capaces de planificar, tomar decisiones e interactuar con entornos externos a través de herramientas informáticas.
+
+* **El Framework ReAct (Reasoning and Acting):** Esta arquitectura entrelaza el razonamiento lingüístico con la ejecución de acciones concretas. El agente genera un "Pensamiento" sobre la situación actual, decide ejecutar una "Acción" específica (como invocar una API, realizar una consulta SQL o ejecutar código Python en un entorno aislado) y analiza la "Observación" devuelta por el entorno para actualizar su estado de conocimiento y proceder con el siguiente paso lógico.
+* **Sistemas de Memoria Agencial:** Para operar de forma autónoma a largo plazo, los agentes requieren dos tipos de memoria:
+    * *Memoria a Corto Plazo:* Mantenida a través del búfer de contexto del prompt, almacenando la historia inmediata de la sesión y las variables de estado actuales.
+    * *Memoria a Largo Plazo:* Implementada mediante bases de datos vectoriales externas que permiten al agente recuperar información de interacciones pasadas ocurridas semanas o meses atrás, aplicando filtros de relevancia y recencia semántica.
+
+# 6. ARQUITECTURAS RAG AVANZADAS, EVALUACIÓN DE RECUPERACIÓN Y RE-RANKING
+
+## 6.1 Estrategias Complejas de Ingesta y Optimización de Búsqueda
+
+Los sistemas RAG corporativos estándar sufren de degradación de rendimiento cuando la densidad de la información es alta o cuando las consultas requieren agregación de múltiples fuentes. Las arquitecturas RAG de grado de producción mitigan esto mediante pipelines avanzados de datos:
+
+* **Estrategia de Fragmentación de Dos Niveles (Parent-Child Chunking):** En lugar de indexar y recuperar los mismos fragmentos de texto que se envían al LLM, esta arquitectura divide los documentos en fragmentos grandes ("Padres") para mantener el contexto global, y estos a su vez en fragmentos pequeños ("Hijos") que son transformados en embeddings vectoriales. La búsqueda vectorial mapea los fragmentos hijos para garantizar precisión matemática, pero al momento de la generación, se inyecta el fragmento padre completo en el prompt, dotando al LLM de un contexto histórico superior.
+* **Generación Aumentada por Búsqueda con Re-Ranking (Modelos de Reordenamiento):** La búsqueda vectorial pura basada en la similitud del coseno suele fallar al capturar la semántica exacta debido a las limitaciones de los modelos de embeddings bi-encoder. Para solucionarlo, se implementa una arquitectura en dos etapas: una recuperación inicial rápida de los top-100 fragmentos más cercanos, seguida de una etapa de reordenamiento (*re-ranking*) donde un modelo cross-encoder evalúa la relación matemática profunda entre la pregunta y cada fragmento seleccionado, reorganizando los fragmentos y enviando solo los top-5 verdaderamente óptimos al LLM.
+
+## 6.2 Frameworks de Evaluación Cuantitativa (RAGAs / TruLens)
+
+La optimización de un sistema RAG no puede basarse en intuiciones. Se requiere la implementación de métricas automatizadas que evalúen de forma continua la calidad de la recuperación y la fidelidad de la generación a través del paradigma de "LLM como Juez" (*LLM-as-a-Judge*).
+
+* **Fidelidad (Faithfulness):** Mide si la respuesta generada por el LLM se sustenta exclusivamente en los fragmentos de texto recuperados. Evalúa el riesgo de alucinación determinando si el modelo introdujo conocimiento paramétrico externo no verificable en las fuentes.
+* **Relevancia de la Respuesta (Answer Relevance):** Cuantifica qué tan directamente responde el texto generado a la consulta original del usuario, penalizando respuestas redundantes, evasivas o incompletas.
+* **Relevancia del Contexto (Context Precision / Recall):** Evalúa la calidad del motor de búsqueda vectorial. La precisión mide si los fragmentos recuperados contienen información altamente concentrada y útil para la tarea, mientras que el *recall* asegura que toda la información necesaria para responder la pregunta fue efectivamente integrada en el contexto.
+
+# 7. MLOPs: DESPLIEGUE, OPTIMIZACIÓN Y EVALUACIÓN OPERATIVA DE LLMs
+
+## 7.1 Técnicas de Cuantización y Compresión de Parámetros
+
+El despliegue industrial de LLMs con decenas de miles de millones de parámetros presenta desafíos de costos y hardware debido a las restricciones de memoria VRAM en las GPUs. Las técnicas de compresión permiten ejecutar modelos avanzados en infraestructuras optimizadas disminuyendo el gasto energético y de cómputo.
+
+* **Cuantización de Pesos (FP16 a INT8 / INT4):** Los modelos nativos se entrenan utilizando precisión de punto flotante de 32 o 16 bits (FP32/FP16). La cuantización mapea estos valores numéricos continuos a representaciones discretas de enteros de 8 o 4 bits (INT8/INT4) mediante funciones de escala y redondeo estocástico. Esto reduce la huella de memoria del modelo hasta en un 75% con una pérdida marginal e imperceptible en la precisión cognitiva del lenguaje.
+* **Formatos Avanzados de Cuantización (AWQ, GPTQ, GGUF):** * *AWQ (Activation-aware Weight Quantization):* Protege los canales de pesos más importantes basándose en las observaciones de activación durante la inferencia, cuantizando agresivamente el resto.
+    * *GGUF:* Formato optimizado para ejecución tanto en CPU como en GPU, permitiendo la carga eficiente de modelos por capas mediante técnicas de mapeo de memoria directa (mmap).
+
+## 7.2 Ajuste Fino Eficiente en Parámetros (PEFT) y Cuantización con LoRA (QLoRA)
+
+Cuando un caso de uso corporativo requiere adaptar un modelo a una jerga técnica específica o un formato de salida propietario, el ajuste fino completo (*Full Fine-Tuning*) resulta inviable económicamente. Las metodologías PEFT resuelven esto optimizando solo una fracción mínima de los parámetros.
+
+* **Adaptación de Bajo Rango (LoRA - Low-Rank Adaptation):** En lugar de modificar las matrices de pesos originales de las capas de atención del Transformer (que permanecen congeladas), LoRA introduce pares de matrices de descomposición de bajo rango ajustables en paralelo a la arquitectura. Esto reduce el número de parámetros a entrenar en un factor de 10,000, disminuyendo drásticamente los requerimientos de memoria durante la fase de retropropagación.
+* **QLoRA (Quantized LoRA):** Evolución que lleva el concepto un paso más allá al congelar el modelo base en una precisión de 4 bits utilizando un tipo de datos especializado denominado *NormalFloat4 (NF4)*. QLoRA permite realizar el ajuste fino de modelos de alta escala (ej. 70 mil millones de parámetros) en una sola GPU comercial, manteniendo intacta la estabilidad del gradiente gracias a la cuantización de doble capa y la introducción de picos de paginación de memoria de emergencia.
+
+# 8. INFRAESTRUCTURA DE GRAN ESCALA, INFERENCIA OPTIMIZADA Y SEGURIDAD
+
+## 8.1 Motores de Inferencia de Alto Rendimiento y Paginación de Atención
+
+Una vez optimizado y comprimido el modelo, su puesta en producción comercial exige arquitecturas capaces de atender miles de solicitudes simultáneas por segundo, optimizando el rendimiento de tokens por segundo y minimizando la latencia del primer token (TTFT - Time to First Token).
+
+* **vLLM y el Mecanismo PagedAttention:** El principal cuello de botella en la inferencia de LLMs es la memoria ocupada por las claves y valores de las capas de atención pasadas, conocida como el *KV Cache*. Las arquitecturas tradicionales asignaban memoria de forma contigua para este caché, generando fragmentación y desperdiciando hasta un 60% de la VRAM. Inspirado en la memoria virtual de los sistemas operativos, *PagedAttention* divide el KV Cache en bloques de memoria no contiguos indexados mediante una tabla de páginas dinámica. Esto permite un aprovechamiento del 96% de la VRAM, incrementando la capacidad de procesamiento de solicitudes concurrentes (*throughput*) hasta en un 400%.
+* **Estrategias de Inferencia Distribuida:** Para modelos cuyos parámetros exceden la capacidad de una sola GPU, se implementan técnicas de paralelismo de tensores (Tensor Parallelism) donde las operaciones matriciales de una misma capa se dividen y ejecutan concurrentemente a través de múltiples tarjetas conectadas mediante canales de alto ancho de banda como NVLink, reduciendo los tiempos de sincronización inter-GPU.
+
+## 8.2 Protocolos de Seguridad, Gobernanza Legal y Mitigación de Vulnerabilidades
+
+La exposición de sistemas basados en IA generativa en entornos de producción introduce vectores de ataque informáticos únicos que deben ser mitigados mediante capas de seguridad perimetral a nivel de software e infraestructura:
+
+* **Inyección de Prompts (Prompt Injection):** Ataques diseñados para evadir las directrices de seguridad del sistema mediante instrucciones maliciosas ocultas en las entradas de los usuarios o en los documentos recuperados por el sistema RAG (inyección indirecta). Se mitiga implementando arquitecturas de validación dual, donde un modelo clasificador ligero (ej. Llama-Guard) analiza de forma síncrona la entrada del usuario antes de consolidar el prompt final.
+* **Filtros de Salida y Guardrails de Seguridad:** Implementación de políticas de control semántico que analizan las respuestas del modelo en tiempo real antes de ser transmitidas al cliente final. Estos sistemas bloquean de manera automatizada la fuga de información confidencial (PII - Información de Identificación Personal), la generación de código malicioso y la exposición a riesgos reputacionales institucionales, asegurando el cumplimiento estricto de los marcos regulatorios internacionales de Inteligencia Artificial.
