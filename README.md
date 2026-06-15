@@ -1,6 +1,6 @@
-# TicketGPT - U3
+# LangGraph_Python
 
-Agente orquestador con peque�os agentes de dominio.
+Sistema multiagente en el que un Agente Orquestador clasifique la intención de la consulta del usuario 
 
 Este proyecto recibe una consulta, el orquestador decide la ruta y el flujo continúa con un nodo específico:
 `finance`, `hr`, `tech`, `legal` o `unknown`.
@@ -49,7 +49,7 @@ MAX_PROMPT_TOKENS=4096
 - `src.Agent.orchestrator` es el nodo central.
 - El orquestador usa un LLM para elegir un dominio.
 - Los agentes de dominio están en `src/Agent` e incluyen: `/finance.py`, `hr.py`, `tech.py`, `legal.py` y `unknown.py`.
-- El grafo de ejecuci�n est� en `src/utils/graph_builder.py`.
+- El grafo de ejecución está en `src/utils/graph_builder.py`.
 
 Flujo principal:
 
@@ -59,9 +59,9 @@ Si la consulta no pertenece claramente a un dominio, se enruta a `unknown`.
 
 ---
 
-## 4. Ejecutar la ingesti�n
+## 4. Ejecutar la ingestión
 
-### Qu� hace
+### Qué hace
 
 `src/scripts/run_ingestion.py` procesa los archivos `documents/*.md` y los divide en chunks para su uso posterior.
 
@@ -74,7 +74,7 @@ uv run python -m src.scripts.run_ingestion --method fixed --chunk-size 500 --chu
 ### Flags disponibles
 
 - `--method`: `fixed` o `sentence`.
-- `--chunk-size`: tama�o m�ximo de chunk en caracteres.
+- `--chunk-size`: tamaño máximo de chunk en caracteres.
 - `--chunk-overlap`: solapamiento entre chunks (solo para `fixed`).
 
 ### Ejemplo
@@ -87,7 +87,7 @@ uv run python -m src.scripts.run_ingestion --method sentence --chunk-size 500
 
 ## 5. Ejecutar consultas
 
-### Qu� hace
+### Qué hace
 
 `src/scripts/run_query.py` abre un bucle interactivo que pide preguntas y muestra respuestas del grafo de agentes.
 
@@ -129,7 +129,7 @@ uv run python -m src.scripts.read_chroma
 
 ## 8. Dependencias principales
 
-Las dependencias del proyecto est�n en `pyproject.toml` y incluyen:
+Las dependencias del proyecto están en `pyproject.toml` y incluyen:
 
 - `chromadb`
 - `langchain`, `langchain-chroma`, `langchain-openai`, `langchain-text-splitters`, `langchain-community`
