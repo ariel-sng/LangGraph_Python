@@ -19,7 +19,7 @@ pip install uv
 
 ```bash
 git clone https://github.com/ariel-sng/LangGraph_Python
-cd "TicketGPT - U3"
+cd "LangGraph_Python"
 ```
 
 3. Instalar dependencias:
