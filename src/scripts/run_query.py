@@ -45,6 +45,6 @@ while True:
         }
     )
     print("="*100)
-    print("Respuesta del grafo")
+    print("Respuesta del grafo: ")
     print(result["answer"])
     print("="*100)
