@@ -97,6 +97,10 @@ uv run python -m src.scripts.run_ingestion --method sentence --chunk-size 500
 uv run python -m src.scripts.run_query
 ```
 
+### Flags disponibles
+
+- `--no-eval`: omite la ejecución del agente evaluador y muestra solo la respuesta.
+
 ### Uso
 
 - Escribe la pregunta.
