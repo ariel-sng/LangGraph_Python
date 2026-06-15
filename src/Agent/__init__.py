@@ -4,8 +4,9 @@ from .tech import tech_node
 from .finance import finance_node
 from .hr import hr_node
 from .orchestrator import orchestrator_node, router
+from .answer import answer_node
 
-NODES = {
+NODES_RAG = {
     "unknown": unknown_node,
     "legal": legal_node,
     "tech": tech_node,
@@ -21,6 +22,6 @@ __all__ = [
     "hr_node",
     "orchestrator_node",
     "router",
-    "NODES",
+    "NODES_RAG",
 ]
 
