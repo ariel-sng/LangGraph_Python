@@ -63,12 +63,12 @@ Si la consulta no pertenece claramente a un dominio, se enruta a `unknown`.
 
 ### Qué hace
 
-`src/scripts/run_ingestion.py` procesa los archivos `documents/*.md` y los divide en chunks para su uso posterior.
+`src/scripts/run_ingest.py` procesa los archivos `documents/*.md` y los divide en chunks para su uso posterior.
 
 ### Comando
 
 ```bash
-uv run python -m src.scripts.run_ingestion --method fixed --chunk-size 500 --chunk-overlap 100
+uv run python -m src.scripts.run_ingest --method fixed --chunk-size 500 --chunk-overlap 100
 ```
 
 ### Flags disponibles
@@ -80,7 +80,7 @@ uv run python -m src.scripts.run_ingestion --method fixed --chunk-size 500 --chu
 ### Ejemplo
 
 ```bash
-uv run python -m src.scripts.run_ingestion --method sentence --chunk-size 500
+uv run python -m src.scripts.run_ingest --method sentence --chunk-size 500
 ```
 
 ---
@@ -125,7 +125,7 @@ uv run python -m src.scripts.read_chroma
 - `src/utils/graph_builder.py`: construye el grafo y las rutas.
 - `src/Agent/orchestrator.py`: toma la decisión de ruta.
 - `src/Agent/finance.py`, `hr.py`, `tech.py`, `legal.py`, `unknown.py`: agentes de dominio.
-- `src/scripts/run_ingestion.py`: ingestión de documentos.
+- `src/scripts/run_ingest.py`: ingestión de documentos.
 - `src/scripts/run_query.py`: consulta interactiva.
 - `src/scripts/read_chroma.py`: muestra los chunks guardados.
 
@@ -137,7 +137,7 @@ El evaluador es un componente externo al grafo de LangGraph que se ejecuta una v
 
 ---
 
-## 8. Dependencias principales
+## 9. Dependencias principales
 
 Las dependencias del proyecto están en `pyproject.toml` y incluyen:
 
