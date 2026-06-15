@@ -123,11 +123,17 @@ uv run python -m src.scripts.read_chroma
 
 - `src/config/settings.py`: carga `.env`.
 - `src/utils/graph_builder.py`: construye el grafo y las rutas.
-- `src/Agent/orchestrator.py`: toma la decisi�n de ruta.
+- `src/Agent/orchestrator.py`: toma la decisión de ruta.
 - `src/Agent/finance.py`, `hr.py`, `tech.py`, `legal.py`, `unknown.py`: agentes de dominio.
-- `src/scripts/run_ingestion.py`: ingesti�n de documentos.
+- `src/scripts/run_ingestion.py`: ingestión de documentos.
 - `src/scripts/run_query.py`: consulta interactiva.
 - `src/scripts/read_chroma.py`: muestra los chunks guardados.
+
+---
+
+## 8. Evaluador
+
+El evaluador es un componente externo al grafo de LangGraph que se ejecuta una vez finalizado el flujo. Su función es analizar la consulta, el contexto recuperado por el RAG y la respuesta generada para asignar un puntaje y una justificación sobre la calidad del uso del contexto. Si la ruta seleccionada es unknown, evalúa únicamente que la respuesta rechace correctamente una consulta fuera del alcance del sistema.
 
 ---
 
