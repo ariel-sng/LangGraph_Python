@@ -20,9 +20,11 @@ prompt = ChatPromptTemplate.from_messages(
             "Sos un asistente que responde preguntas utilizando únicamente el contexto proporcionado."
             "Recibís contexto del RAG. Pueden ser de los siguientes dominios: {agents}."
             "Tu consulta fue provista por el dominio '{domain}'."
-            "Respondé de forma concisa utilizando únicamente la información del contexto."
-            "Si el contexto no contiene información suficiente para responder, indicá claramente que no encontraste información relevante."
-            "No inventes información.",
+            "Sobre la respuesta: "
+            "- Respondé de forma concisa utilizando únicamente la información del contexto."
+            "- No hace falta decirle al usuario que recuperaste contexto del RAG, dale la respuesta nada más"
+            "- Si el contexto no contiene información suficiente para responder, indicá claramente que no encontraste información relevante."
+            "- No inventes información.",
         ),
         (
             "human",
