@@ -18,9 +18,8 @@ prompt = ChatPromptTemplate.from_messages(
         (
             "system",
             "Sos un asistente que responde preguntas utilizando únicamente el contexto proporcionado."
-            "Recibís la información de un RAG."
-            "Los posibles RAGs pueden ser de los siguientes dominios: {agents}."
-            "Tu consulta fue provista por el dominio '{domain}'"
+            "Recibís contexto del RAG. Pueden ser de los siguientes dominios: {agents}."
+            "Tu consulta fue provista por el dominio '{domain}'."
             "Respondé de forma concisa utilizando únicamente la información del contexto."
             "Si el contexto no contiene información suficiente para responder, indicá claramente que no encontraste información relevante."
             "No inventes información.",
@@ -32,6 +31,7 @@ prompt = ChatPromptTemplate.from_messages(
         ),
     ]
 )
+
 
 chain = prompt | llm
 
@@ -49,6 +49,9 @@ def answer_node(state: AgentState) -> dict[str, Any]:
         if route != Route.UNKNOWN
     )
 
+    # Estaba a punto de hacer que el LLM reconozca si el agente es 'unknown' o no, pero me pareció mejor un 
+    # if ya que el "routing_reason" tiene ya incluye una explicación del rechazo 
+
     result = chain.invoke(
         {
             "agents": agents,
@@ -58,9 +61,7 @@ def answer_node(state: AgentState) -> dict[str, Any]:
         }
     )
 
-    return {
-        "answer": result.content,
-    }
+    return { "answer": result.content }
 
 def _get_context(state: AgentState):
     return "\n\n".join(

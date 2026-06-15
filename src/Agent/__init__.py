@@ -7,11 +7,15 @@ from .orchestrator import orchestrator_node, router
 from .answer import answer_node
 
 NODES_RAG = {
-    "unknown": unknown_node,
     "legal": legal_node,
     "tech": tech_node,
     "finance": finance_node,
     "hr": hr_node,
+}
+
+NODES = {
+    **NODES_RAG,
+    "unknown": unknown_node
 }
 
 __all__ = [
