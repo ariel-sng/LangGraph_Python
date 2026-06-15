@@ -87,8 +87,67 @@ Queda terminantemente prohibido ofrecer, dar, solicitar o recibir, de forma dire
 
     Regalos y Hospitalidades: Los colaboradores solo podrán aceptar o entregar obsequios corporativos de carácter puramente institucional o promocional cuyo valor comercial estimado no supere los 50 USD. Cualquier invitación a eventos, viajes o comidas de negocios que exceda dicho umbral o que pueda ser percibida como un intento de influir en una decisión comercial deberá ser declarada por escrito y autorizada expresamente por el Oficial de Cumplimiento de la organización. El incumplimiento de estas normas éticas derivará en la rescisión contractual inmediata del infractor y la correspondiente denuncia ante los órganos de procuración de justicia.
 
-Recomendaciones Avanzadas para tu RAG:
+# 7. GOBERNANZA SOCIETARIA, PODERES Y REPRESENTACIÓN LEGAL
 
-    Overlap (Solapamiento): Al configurar tu herramienta de fragmentación (Splitter), utiliza un tamaño de bloque de unos 1000 a 1500 caracteres con un solapamiento (overlap) de 200 caracteres. Esto asegurará que las relaciones entre tablas y texto explicativo no se pierdan.
+## 7.1 Otorgamiento, Revocación y Control Centralizado de Poderes Notariales
 
-    Generación de Preguntas Sintéticas: Puedes pasar fragmentos de este documento a un modelo LLM para generar pares de "Pregunta/Respuesta" (por ejemplo: "¿Qué pasa si un empleado tiene un rendimiento menor al 70%?") e indexar esas preguntas junto con el documento para optimizar la recuperación semántica.
+La representación jurídica de las distintas entidades legales que conforman el grupo corporativo está estrictamente regulada para evitar actos de disposición o dominio no autorizados que puedan comprometer el patrimonio institucional.
+
+* **Tipos de Poderes y Facultades:** La Dirección Jurídica clasificará y delimitará los poderes otorgados de acuerdo con la función del colaborador, requiriendo de forma obligatoria que todo poder para Actos de Dominio (enajenación de activos, contratación de deuda) o Actos de Administración Mayor (firmas de contratos por montos que superen los umbrales de la Dirección Financiera) se otorgue siempre bajo la modalidad de ejercicio mancomunado (dos firmas autorizadas). Las facultades para Pleitos y Cobranzas o Actos de Administración Menor podrán ser ejercidas de forma individual por los abogados internos y gerentes autorizados.
+* **Registro Único de Apoderados (RUA):** Se implementa un registro digital centralizado en el ERP Legal que contiene la vigencia, alcance territorial y limitaciones de todos los instrumentos notariales emitidos. El equipo legal ejecutará una auditoría trimestral de este registro.
+* **Protocolo de Revocación Inmediata:** En el momento exacto en que un apoderado legal sea desvinculado de la compañía o reasignado a un puesto que no requiera facultades de representación, el área de Relaciones Laborales notificará en tiempo real al Departamento Jurídico. Este iniciará el proceso de revocación notarial dentro de las 24 horas siguientes, enviando las notificaciones correspondientes a las instituciones bancarias, registros públicos de comercio y notarías de la jurisdicción para inhabilitar de inmediato la firma del excolaborador.
+
+## 7.2 Sesiones de Consejo, Asambleas de Accionistas y Libros Corporativos
+
+El cumplimiento formal de las obligaciones societarias constituye una garantía de transparencia y solidez jurídica ante inversionistas, auditores y autoridades reguladoras.
+
+* **Custodia de Libros Oficiales:** La Dirección Jurídica es la responsable y depositaria última de los Libros de Actas de Asambleas, Libros de Registro de Acciones/Socios, y Libros de Variaciones de Capital. Queda estrictamente prohibido extraer dichos libros de las oficinas centrales sin autorización expresa por escrito del Secretario del Consejo de Administración.
+* **Formalización de Acuerdos:** Toda decisión emanada de la Asamblea de Accionistas o del Consejo de Administración (como aprobación de estados financieros anuales, decretos de dividendos, fusiones, adquisiciones o modificaciones a los estatutos sociales) debe ser debidamente protocolizada ante Fedatario Público (Notario o Corredor Público) e inscrita en el Registro Público de Comercio correspondiente en un plazo máximo de 30 días hábiles posteriores a la celebración del acto.
+
+# 8. DERECHO DE LA COMPETENCIA Y RELACIONES CON EL MERCADO
+
+## 8.1 Prevención de Prácticas Monopólicas, Colusión y Cartelización
+
+La empresa compite de manera enérgica pero justa en el mercado, adhiriéndose estrictamente a las leyes de defensa de la competencia, antimonopolio y libre concurrencia aplicables en cada país de operación.
+
+* **Prohibición de Acuerdos Horizontales (Carteles):** Queda terminantemente prohibido para cualquier colaborador o directivo mantener comunicaciones, formales o informales, con representantes de empresas competidoras que tengan por objeto o efecto: fijar, concertar o manipular precios de venta o compra; limitar o restringir la producción o distribución de servicios; dividir, asignar o repartir mercados, zonas geográficas o segmentos de clientes; o coordinar posturas en procesos de licitación pública o privada (bid-rigging).
+* **Intercambio de Información Sensible:** En reuniones de asociaciones gremiales, cámaras de comercio o foros industriales, los empleados de la compañía tienen prohibido compartir información comercial sensible y no pública, tal como márgenes de ganancia, estructuras de costos, listas de precios futuras, planes de expansión estratégica o condiciones comerciales otorgadas a clientes específicos. Ante cualquier intento de un tercero de abordar estos temas, el colaborador debe manifestar su inconformidad de inmediato, exigir que conste en acta (si la hay) y retirarse de la reunión, reportando el incidente al Oficial de Cumplimiento dentro de las siguientes 12 horas.
+
+## 8.2 Publicidad Comercial, Prácticas Comerciales Justas y Protección al Consumidor
+
+Toda campaña de marketing, comunicación publicitaria o esfuerzo de prospección comercial debe ser validada previamente por el área legal para asegurar el cumplimiento de la normativa de protección al consumidor y evitar riesgos por publicidad engañosa.
+
+* **Sustentabilidad de Aseveraciones:** Está prohibido realizar afirmaciones publicitarias sobre las características, beneficios, certificaciones o rendimiento de los productos o servicios de la compañía que no cuenten con un respaldo documental técnico, científico o estadístico verificable previo.
+* **Respeto a la Competencia:** Las campañas de publicidad comparativa solo se autorizarán si la comparación se basa en datos objetivos, veraces y comprobables, omitiendo descalificaciones subjetivas, denigración de marcas competidoras o cualquier estrategia que busque generar confusión o engaño en el consumidor final.
+
+# 9. GESTIÓN JURÍDICA DE PROPIEDADES, CONTRATOS INMOBILIARIOS Y PERMISOS
+
+## 9.1 Arrendamientos, Adquisición de Bienes Raíces y Gravámenes
+
+La infraestructura física de la compañía (oficinas corporativas, centros de distribución, locales comerciales) representa un foco de atención legal crítico debido a los plazos, compromisos financieros e implicaciones operativas que conlleva.
+
+* **Debida Diligencia Inmobiliaria (Real Estate Due Diligence):** Antes de la suscripción de cualquier contrato de arrendamiento a largo plazo o de la adquisición de un inmueble, el equipo legal debe realizar una investigación exhaustiva que incluya: verificación de la titularidad de la propiedad en el Registro Público de la Propiedad; obtención del certificado de libertad de gravamen; confirmación de que el uso de suelo permitido sea compatible con la operación proyectada; y validación de que el inmueble no se encuentre sujeto a litigios pendientes o procesos de expropiación.
+* **Condiciones Contractuales Críticas:** Todo contrato de arrendamiento comercial debe negociarse bajo parámetros que incluyan cláusulas de rescisión anticipada sin penalización por causas de fuerza mayor o cambios en la estrategia de negocio (otorgando un preaviso razonable); delimitación clara de la responsabilidad por mantenimiento estructural (a cargo del arrendador) versus mantenimiento operativo (a cargo de la empresa); y derecho de preferencia para renovación.
+
+## 9.2 Licencias, Permisos Operativos y Relaciones con Autoridades Locales
+
+La continuidad de las operaciones físicas depende de mantener vigentes todas las autorizaciones gubernamentales correspondientes.
+
+* **Matriz de Permisos Corporativos:** El área de Operaciones Legales mantendrá un tablero de control con alertas automatizadas (a 90, 60 y 30 días) para gestionar la renovación de licencias de funcionamiento, permisos ambientales, dictámenes de protección civil, y autorizaciones de anuncios publicitarios exteriores de cada sede.
+* **Atención a Inspecciones Gubernamentales:** Ante la presentación de inspectores de autoridades municipales, estatales o federales en las instalaciones, el gerente de la sede deberá exigir la orden de inspección por escrito, validar la identidad oficial de los funcionarios y notificar de inmediato al área Jurídica antes de permitir el acceso. La inspección se documentará minuciosamente mediante un acta interna, tomando fotografía de los puntos observados por la autoridad para preparar la estrategia de atención o desahogo de requerimientos de forma coordinada con los abogados corporativos.
+
+# 10. PROTOCOLO DE AUDITORÍA LEGAL, ACTUALIZACIÓN NORMATIVA Y CONTROL DE VERSIONES
+
+## 10.1 Auditorías Legales Periódicas (Legal Health Check)
+
+Con el fin de asegurar el cumplimiento preventivo y detectar de manera oportuna pasivos contingentes u omisiones regulatorias, el Departamento Jurídico ejecutará un programa anual de auditoría legal interna.
+
+* **Alcance de la Auditoría:** Se seleccionará de manera aleatoria o basada en riesgo un porcentaje de los contratos vigentes, expedientes laborales, registros de propiedad intelectual, avisos de privacidad y licencias operativas para evaluar su estricta alineación con este marco normativo. Las desviaciones encontradas se clasificarán según su nivel de riesgo (Crítico, Alto, Medio o Bajo) y se integrarán en un Plan de Acción Remedial (PAR) con fechas límite obligatorias de regularización y mánagers asignados para su solventación.
+* **Reporte al Comité de Auditoría:** Los resultados consolidados de estas evaluaciones, junto con el estatus de las contingencias por litigios activos (conforme a la sección 5.2), serán presentados formalmente de manera semestral ante el Comité de Auditoría y Gobierno Corporativo de la Junta Directiva.
+
+## 10.2 Actualización Normativa, Gobernanza del Manual y Control de Versiones
+
+Las leyes y regulaciones en los países de operación están en constante evolución, lo que exige un mecanismo dinámico de adaptación documental.
+
+* **Monitoreo Legislativo:** El equipo legal mantendrá un proceso de revisión continua de los diarios oficiales y gacetas regulatorias de las jurisdicciones correspondientes, enfocándose en reformas fiscales, laborales, de privacidad de datos, ambientales o de comercio electrónico que impacten el modelo de negocio.
+* **Mecanismo de Modificación y Difusión:** Cualquier modificación estructural o adición a este marco regulatorio de Compliance y Gestión Legal deberá ser proyectada por el Director Jurídico, aprobada por el Oficial de Cumplimiento (CCO) y ratificada por el CEO de la organización. Una vez autorizada la nueva versión del documento, se procederá a su publicación en la intranet corporativa, deshabilitando las versiones anteriores y coordinando con el área de Talento Humano la impartición de sesiones de actualización obligatorias para el personal directivo y operativo con facultades de toma de decisiones o firma de contratos.

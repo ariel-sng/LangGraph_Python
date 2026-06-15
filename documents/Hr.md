@@ -154,3 +154,73 @@ En el último día efectivo de labores del colaborador, se ejecutará el checkli
     Desactivación de Accesos: IT procederá a la baja de todas las licencias de software, accesos a servidores, correo y bases de datos exactamente a las 18:00 horas del último día de labores.
 
     Entrevista de Salida (Exit Interview): Una sesión llevada a cabo por un especialista de RRHH (nunca el jefe directo) para recopilar retroalimentación sincera sobre la cultura, el liderazgo, los motivos de la salida y las áreas de mejora de la organización. Los datos consolidados de estas entrevistas se analizan trimestralmente para ajustar las políticas de retención de la empresa.
+
+# 7. RELACIONES LABORALES, MARCO DISCIPLINARIO Y RESOLUCIÓN DE CONFLICTOS
+
+## 7.1 Reglamento Interior de Trabajo y Escala de Sanciones
+
+La convivencia armónica y el orden operativo dentro de la organización se sustentan en el cumplimiento estricto del Reglamento Interior de Trabajo (RIT) depositado ante las autoridades competentes. Las acciones u omisiones que contravengan las políticas de la empresa serán sancionadas de forma progresiva, aplicando el principio de proporcionalidad:
+
+* **Amonestación Verbal:** Aplicable ante faltas menores leves (ej. retardos injustificados acumulados en un mes, omisión ocasional del registro de asistencia). Debe quedar registrada en la bitácora del supervisor como antecedente.
+* **Amonestación Escrita (Acta de Apercibimiento):** Se activa tras la reincidencia en una falta menor o ante una infracción moderada (ej. incumplimiento de los protocolos de ciberseguridad, uso indebido de las herramientas de comunicación interna). Es redactada por RRHH y firmada en presencia de dos testigos, integrándose formalmente al expediente digital del colaborador.
+* **Suspensión Temporal de Labores (De 1 a 8 días):** Aplicable ante la acumulación de tres amonestaciones escritas en un periodo de 90 días, o por faltas de gravedad media (ej. desobediencia explícita a instrucciones directas de un supervisor, trato inadecuado a clientes o compañeros). Se ejecuta sin goce de sueldo y bajo estricta notificación legal.
+* **Rescisión de Contrato:** Terminación inmediata de la relación laboral por la comisión de faltas graves estipuladas en el Código de Conducta y las leyes laborales vigentes (ej. falsificación de documentos, acoso, robo, violencia física o verbal, consumo de sustancias prohibidas dentro de las instalaciones).
+
+## 7.2 Comité de Ética y Protocolo para la Prevención del Acoso y Hostigamiento
+
+La organización mantiene un compromiso de cero tolerancia ante conductas que vulneren la dignidad de las personas. El Comité de Ética es el órgano autónomo encargado de vigilar, investigar y dictaminar sobre casos de acoso laboral (*mobbing*), acoso sexual o cualquier tipo de discriminación.
+
+[Denuncia en Canal de Ética] ➔ [Evaluación de Admisibilidad (48h)] ➔ [Medidas Cautelares Preventivas] ➔ [Investigación y Pruebas (10 días)] ➔ [Dictamen y Aplicación de Sanción]
+
+* **Medidas Cautelares de Emergencia:** Tras la recepción y validación inicial de una denuncia de alta gravedad, RRHH implementará de inmediato la separación física o reasignación de equipos de los involucrados para proteger a la presunta víctima durante el proceso de investigación, garantizando la no represalia.
+* **Confidencialidad y Debido Proceso:** Todas las declaraciones, testimonios y pruebas documentales recabadas se gestionarán bajo cadena de custodia digital confidencial. El Comité emitirá un dictamen vinculante en un plazo no mayor a 10 días hábiles posteriores al cierre de la investigación.
+
+# 8. CAPACITACIÓN CONTINUA, PLAN DE CARRERA Y GESTIÓN DEL CONOCIMIENTO
+
+## 8.1 Plan Institucional de Capacitación (PIC) y Presupuesto Anual de Desarrollo
+
+El desarrollo de habilidades es una inversión estratégica de coparticipación. El área de Aprendizaje y Desarrollo (L&D) consolidará anualmente las necesidades de capacitación derivadas de los *Performance Reviews* del Q4 para configurar el PIC del siguiente ejercicio fiscal.
+
+* **Asignación de Créditos de Aprendizaje:** Cada colaborador de Nivel 4 en adelante dispondrá de una bolsa anual equivalente a 1,200 USD para certificaciones externas, cursos de especialización o licencias educativas, siempre que estén directamente alineados con su plan de desarrollo individual (IDP) y aprobados por su Director de Área.
+* **Obligatoriedad de Cursos Regulatorios:** Todo el personal deberá completar anualmente un mínimo de 20 horas de capacitación obligatoria a través del LMS corporativo en materias de: Ciberseguridad e Información Confidencial, Prevención de Lavado de Activos (según el rol), Diversidad e Inclusión, y Normas de Seguridad y Salud en el Trabajo.
+
+## 8.2 Política de Promoción Interna y Planes de Sucesión
+
+La organización prioriza la retención de talento clave mediante una política clara de promoción interna y mapeo de sucesores para puestos críticos (Direcciones, Gerencias y Roles Técnicos Core).
+
+* **Requisitos para Postulación a Promociones:**
+    * Haber cumplido un mínimo de 12 meses en la posición actual.
+    * No poseer actas administrativas o sanciones disciplinarias vigentes en los últimos 6 meses.
+    * Haber obtenido una calificación de "Alto Desempeño" o superior en las últimas dos evaluaciones trimestrales.
+* **Mapeo de Sucesión (Talent Review):** Anualmente, la Dirección de RRHH y el Comité Ejecutivo revisarán el mapa de sucesión de la empresa. Las posiciones críticas deben contar con al menos un sucesor de emergencia a corto plazo (Listo ya) y dos a mediano plazo (1-3 años), quienes recibirán mentoría ejecutiva específica para asegurar la continuidad del negocio.
+
+# 9. SALUD OCUPACIONAL, SEGURIDAD HIGIENE Y BIENESTAR EN EL ENTORNO LABORAL
+
+## 9.1 Comisión Mixta de Seguridad e Higiene (CMSH)
+
+En cumplimiento con la legislación laboral internacional y local, se constituye la Comisión Mixta de Seguridad e Higiene, integrada de manera paritaria por representantes de los trabajadores y de la empresa.
+
+* **Recorridos de Verificación:** La CMSH realizará inspecciones mensuales obligatorias en todas las sedes físicas para identificar condiciones inseguras o insalubres (instalaciones eléctricas, salidas de emergencia, ergonomía del mobiliario, iluminación y niveles de ruido).
+* **Brigadas de Emergencia:** Se mantendrán activas y capacitadas de forma permanente las brigadas de: Primeros Auxilios, Evacuación, y Prevención y Combate de Incendios. Todo colaborador ubicado en oficinas corporativas debe participar en los simulacros generales programados semestralmente.
+
+## 9.2 Protocolo de Ergonomía y Salud Mental para Trabajo Remoto e Híbrido
+
+Entendiendo que el entorno de trabajo se extiende a los hogares de los colaboradores bajo modalidades flexibles, la organización extiende sus políticas de salud ocupacional al entorno digital:
+
+* **Ergonomía en Casa:** La empresa otorgará un bono único de equipamiento (*Home Office Stipend*) para la adquisición de una silla ergonómica con soporte lumbar y monitor externo homologados por el área de Salud Ocupacional.
+* **Derecho a la Desconexión Digital:** Con el fin de mitigar el agotamiento tecnológico (*burnout*), se establece una estricta política de desconexión. Queda prohibido el envío de comunicaciones operativas (vía Slack, correo o WhatsApp corporativo) o la programación de reuniones fuera del horario laboral establecido para cada país, así como durante los fines de semana y días de vacaciones, salvo emergencias críticas que pongan en riesgo la infraestructura o la continuidad del negocio.
+
+# 10. GOBERNANZA DE DATOS DEL EMPLEADO, EXPEDIENTES Y CUMPLIMIENTO LEGAL
+
+## 10.1 Privacidad de Datos Personales (GDPR / Leyes Locales de Privacidad)
+
+La organización actúa como custodio de datos personales, financieros, médicos y sensibles de sus colaboradores, aplicando los más altos estándares de seguridad informática y cumplimiento legal.
+
+* **Restricción de Accesos:** Los expedientes del personal están digitalizados, encriptados y centralizados en el sistema HRIS de la compañía. El acceso a esta información está estrictamente restringido al personal autorizado de Operaciones de RRHH, Nómina y Auditoría Legal mediante permisos basados en roles (RBAC).
+* **Derechos ARCO:** Todo colaborador o excolaborador conserva su derecho de Acceso, Rectificación, Cancelación y Oposición de sus datos personales. Las solicitudes de eliminación de expedientes de bajas se procesarán conforme a los plazos mínimos de conservación legal obligatoria exigidos por las autoridades fiscales y laborales de cada país (típicamente 5 años post-desvinculación).
+
+## 10.2 Auditoría Regulatoria de Nómina y Actualización del Manual
+
+Este documento es auditado de manera semestral por firmas externas y el equipo legal corporativo para garantizar que los contratos, pagos de nómina, aportaciones de seguridad social y retenciones fiscales se mantengan actualizados ante las reformas legislativas de cada territorio.
+
+* **Mecanismo de Modificación:** Las actualizaciones a este manual de políticas serán propuestas por la Vicepresidencia de Talento Humano, validadas por el departamento Jurídico y aprobadas por el CEO. Cualquier cambio será notificado de manera masiva con un mínimo de 15 días de anticipación a su entrada en vigor a través de los canales de comunicación interna oficiales.
