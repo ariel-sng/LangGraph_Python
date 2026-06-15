@@ -17,8 +17,9 @@ from src.Agent import NODES_RAG, NODES, orchestrator_node, router, answer_node
 #                               |                  |                 |
 #                               |                  |                 |
 #                               +---> [Legal] -----+                 |
+#                               |                                    |
 #                               |                                    v
-#                               +---> [unknown] -----------------> [END]
+#                               +--->[unknown]-------------------> [END]
                                
 #
 # Todos los nodos de NODES se conectan a "answer" después de procesar,
