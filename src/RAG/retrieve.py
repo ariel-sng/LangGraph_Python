@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Dict, Optional, Any
+from typing import Optional, List, Dict, Any
 
 from src.config.settings import Settings
 
@@ -17,14 +17,39 @@ def _get_chroma(collection_name: str = "default", persist_dir: Optional[str] = N
     return chroma
 
 
-def retrieve_chunks(query: str, k: int = 5, collection_name: str = "default", persist_dir: Optional[str] = None) -> List[Dict[str, Any]]:
+def retrieve_chunks(
+        *,
+        query: str, 
+        k: int = 5, 
+        collection_name: str = "default", 
+        persist_dir: Optional[str] = None,
+        source: Optional[str] = None,
+        ) -> List[Dict[str, Any]]:
     """Return top-k matching chunks from Chroma with their metadata and scores."""
+    
     chroma = _get_chroma(collection_name=collection_name, persist_dir=persist_dir)
-    results = chroma.similarity_search_with_score(query, k=k)
+    #results = chroma.similarity_search_with_score(query, k=k)
+
+    chroma_arg: dict[str, Any] = {"k": k}
+
+    if source:
+        chroma_arg["filter"] = {"source": f"{source.lower()}"}
+
+    results = chroma.similarity_search_with_score(
+        query,
+        **chroma_arg,
+    )
 
     out = []
+
     for doc, score in results:
-        out.append({"text": doc.page_content, "metadata": doc.metadata, "score": float(score)})
+        out.append(
+            {
+                "text": doc.page_content, 
+                "metadata": doc.metadata, 
+                "score": float(score)
+                }
+        )
     return out
 
 

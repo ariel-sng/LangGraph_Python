@@ -4,16 +4,22 @@ from langchain_core.tools import tool
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-from src.Agent.state import AgentState
+from src.models.state import AgentState
+from src.models.route_decision import RouteDecision
+from src.models.route_enum import Route
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0)
+llm = ChatOpenAI(
+    model="gpt-4o-mini", 
+    temperature=0
+    ).with_structured_output(RouteDecision)
 
 prompt = ChatPromptTemplate.from_messages(
     [
         (
             "system",
-            "Sos un router de un sistema multiagente."
-            "Respondé únicamente con una de estas opciones: rag.",
+            "Sos un orquestador de un sistema multiagente de una empresa."
+            "Vas a recibir una consulta del usuario y tenés que seleccionar uno de los siguientes agentes: HR, Legal, Finance, Tech."
+            "En caso de que la consulta no cumpla ninguno de los temas, o directo no sea una consulta, devolvé 'unknown'.",
         ),
         (
             "human",
@@ -22,18 +28,30 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-def orchestrator(state: AgentState) -> dict[str, Any]:
+###         ORQUESTADOR           ###
+def orchestrator_node(state: AgentState) -> dict[str, Any]:
     """
         Decide qué camino seguirá el grafo.
-        Por ahora todas las consultas van al RAG.
     """
     chain = prompt | llm
 
-    result = chain.invoke({"question": state["question"]})
+    result = chain.invoke(
+            {
+                "question": state["question"]
+            }
+        )
 
-    return {"route": result.content}
 
+    print(result.routing_reason) # type: ignore
+    print(result.route) # type: ignore
 
+    # Tengo que meter estos type: ignore porque el IDE no infiere que el LLM retorna un 'RouteDecision'
+    return {
+        "route": result.route,  # type: ignore
+        "routing_reason": result.routing_reason # type: ignore
+        }
+
+###         ROUTER           ###
 def router(state: AgentState) -> str:
     """
         Devuelve el nombre del siguiente nodo.
@@ -41,7 +59,7 @@ def router(state: AgentState) -> str:
     
     direction = state["route"]
 
-    if not isinstance(direction, str):
+    if direction is None or direction not in Route._value2member_map_:
         return "unknown"
     
     return direction

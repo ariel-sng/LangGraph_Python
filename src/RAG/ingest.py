@@ -81,7 +81,7 @@ def ingest_md(
 
     texts = chunks
     
-    metadatas = [{"source": md_path.name} for _ in chunks]
+    metadatas = [{"source": md_path.stem.lower()} for _ in chunks]
     # persist to Chroma via langchain wrapper
     chroma = Chroma.from_texts(
         texts,

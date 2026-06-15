@@ -1,18 +1,16 @@
-# Agent/rag_agent.py
-
 from typing import Any
 
 from src.RAG.retrieve import retrieve_chunks
 from src.models.state import AgentState
 
-def rag_retriever_node(state: AgentState) -> dict[str, Any]:
+def tech_node(state: AgentState) -> dict[str, Any]:
     """
     Recupera contexto desde el RAG y lo guarda en el estado.
     """
 
     results = retrieve_chunks(
                     query =  state["question"],
-                    source = "RAG"
+                    source = "tech"
                 )
 
     return {"context": results}
