@@ -16,6 +16,7 @@ vector_store = Chroma(
 
 # Obtener todos los documentos almacenados
 data = vector_store.get()
+total = len(data["ids"])
 print(data)
 
 ids = data["ids"]
@@ -28,7 +29,7 @@ for i, (doc_id, doc, metadata) in enumerate(
     zip(ids, documents, metadatas), start=1
 ):
     print("=" * 80)
-    print(f"Chunk #{i}")
+    print(f"Chunk {i}/{total}")
     print(f"ID: {doc_id}")
     print(f"Metadata: {metadata}")
     print("Contenido:")

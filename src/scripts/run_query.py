@@ -1,8 +1,12 @@
 from langgraph.graph import StateGraph, START, END
 
+from src.config.settings import Settings
+
 from src.Agent.state import AgentState
 from src.Agent.orchestrator import orchestrator, router
 from src.Agent.rag_agent import rag_retriever
+
+print(Settings.OPENAI_API_KEY)
 
 graph_builder = StateGraph(AgentState)
 
