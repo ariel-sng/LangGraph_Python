@@ -1,7 +1,7 @@
 from langgraph.graph import StateGraph, START, END
 
 from src.models.state import AgentState
-from src.Agent import NODES_RAG, NODES, orchestrator_node, router, answer_node
+from src.agent import NODES_RAG, NODES, orchestrator_node, router, answer_node
 
 
 # Diagrama de formato del grafo:
