@@ -31,9 +31,9 @@ while True:
     result = graph.invoke(
         {
             "question": query,
-            "route": None,
-            "context": None,
-            "answer": None,
+            "route": "",
+            "context": [],
+            "answer": "",
         }
     )
 

@@ -1,19 +1,26 @@
+from typing import Any
+
 from langchain_core.tools import tool
 from src.Agent.state import AgentState
 
 
-def orchestrator(state: AgentState):
+def orchestrator(state: AgentState) -> dict[str, Any]:
     """
-    Decide qué camino seguirá el grafo.
-    Por ahora todas las consultas van al RAG.
+        Decide qué camino seguirá el grafo.
+        Por ahora todas las consultas van al RAG.
     """
 
-    state["route"] = "rag"
-    return state
+    return {"route": "rag"}
 
 
-def router(state):
+def router(state: AgentState) -> str:
     """
-    Devuelve el nombre del siguiente nodo.
+        Devuelve el nombre del siguiente nodo.
     """
-    return state["route"]
+    
+    direction = state["route"]
+
+    if not isinstance(direction, str):
+        return "unknown"
+    
+    return direction
