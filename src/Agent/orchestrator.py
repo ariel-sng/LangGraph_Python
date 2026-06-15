@@ -7,9 +7,11 @@ from src.models.state import AgentState
 from src.models.route_decision import RouteDecision
 from src.models.route_enum import Route
 
+from src.config.settings import Settings
+
 llm = ChatOpenAI(
-    model="gpt-4o-mini", 
-    temperature=0
+    model                   = Settings.OPENAI_LOW_MODEL, 
+    temperature             = 0,
     ).with_structured_output(RouteDecision)
 
 prompt = ChatPromptTemplate.from_messages(
@@ -24,7 +26,7 @@ prompt = ChatPromptTemplate.from_messages(
             - Si la consulta es ambigua y podría pertenecer a más de un dominio, devolvé 'unknown'.
             - Si la consulta no corresponde a ninguno de los dominios disponibles, devolvé 'unknown'.
             - No intentes dividir la consulta ni resolverla parcialmente.'''
-            "Además, proporcioná una breve explicación de la decisión tomada."
+            "Además, proporcioná una breve explicación de la decisión tomada, no más de 30 palabras"
         ),
         (
             "human",

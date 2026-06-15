@@ -5,10 +5,12 @@ from langchain_openai import ChatOpenAI
 
 from src.models.state import AgentState
 from src.models.route_enum import Route
+from src.config.settings import Settings
 
 llm = ChatOpenAI(
-    model="gpt-4.1-mini",
-    temperature=0,
+    model                   = Settings.OPENAI_HIGH_MODEL,
+    temperature             = 0,
+    max_completion_tokens   = Settings.MAX_PROMPT_TOKENS
 )
 
 prompt = ChatPromptTemplate.from_messages(
@@ -19,6 +21,7 @@ prompt = ChatPromptTemplate.from_messages(
             "Recibís la información de un RAG."
             "Los posibles RAGs pueden ser de los siguientes dominios: {agents}."
             "Tu consulta fue provista por el dominio '{domain}'"
+            "Respondé de forma concisa utilizando únicamente la información del contexto."
             "Si el contexto no contiene información suficiente para responder, indicá claramente que no encontraste información relevante."
             "No inventes información.",
         ),
@@ -33,6 +36,7 @@ prompt = ChatPromptTemplate.from_messages(
 chain = prompt | llm
 
 def answer_node(state: AgentState) -> dict[str, Any]:
+    ''' Generador de respuesta final del grafo'''
     
     context = _get_context(state)
     print("-"*80)
