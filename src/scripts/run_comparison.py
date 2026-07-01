@@ -37,7 +37,7 @@ def main():
             "amendment_text": "",
             "contract_context": "",
             "amendment_context": "",
-            "extraction_result": {}
+            "validated_output": None,
         }
     )
 
@@ -56,6 +56,10 @@ def main():
     print("##### CONTEXTUALIZACIÓN ENMIENDA #####")
     
     print(result["amendment_context"]  + '\n')
+
+    # print("##### EXTRACTOR #####")
+
+    # print(result["validated_output"]  + '\n')
 
 if __name__ == "__main__":
     main()

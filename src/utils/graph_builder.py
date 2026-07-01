@@ -65,4 +65,11 @@ def build_img_graph():
     graph.add_edge("parser_img", "contextualizer")
     graph.add_edge("contextualizer", END)
 
+
+    
+    '''graph.add_edge(START, "parser_img")
+    graph.add_edge("parser_img", "contextualizer")
+    graph.add_edge("contextualizer", "extractor")
+    graph.add_edge("extractor", END)'''
+
     return graph.compile()

@@ -1,5 +1,7 @@
 from typing import TypedDict, Any
 
+from src.models.contract_change_output import ContractChangeOutput
+
 class ContractAnalysisState(TypedDict):
     # Entradas
     contract_image_path: str
@@ -14,4 +16,4 @@ class ContractAnalysisState(TypedDict):
     amendment_context: str
 
     # Extracción de cambios
-    extraction_result: dict[str, Any]
+    validated_output: ContractChangeOutput | None
