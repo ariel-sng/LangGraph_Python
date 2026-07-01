@@ -22,8 +22,8 @@ def main():
     if missing:
         parser.error("El/los siguiente(s) archivo(s) no existen:\n" + "\n".join(missing))
 
-    print(f"Primer archivo: {args.file1}")
-    print(f"Segundo archivo: {args.file2}")
+    print(f" Primer archivo cargado exitosamente:\t '{args.file1}'")
+    print(f"Segundo archivo cargado exitosamente:\t '{args.file2}'")
 
 if __name__ == "__main__":
     main()

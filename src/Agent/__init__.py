@@ -6,12 +6,17 @@ from .hr import hr_node
 from .orchestrator import orchestrator_node, router
 from .answer import answer_node
 from .evaluator import evaluate
+from image.parser_image import parse_contract_images_node
 
 NODES_RAG = {
     "legal": legal_node,
     "tech": tech_node,
     "finance": finance_node,
     "hr": hr_node,
+}
+
+NODE_IMG = {
+    "parser_img": parse_contract_images_node
 }
 
 NODES = {
@@ -29,4 +34,5 @@ __all__ = [
     "router",
     "NODES_RAG",
 ]
+
 
