@@ -6,36 +6,34 @@ from src.models.contract_change_output import ContractChangeOutput
 
 
 EXTRACTOR_PROMPT = """
-    Sos un asistente especializado en el análisis comparativo de documentos legales.
+Sos un asistente especializado en el análisis comparativo de documentos legales.
 
-    Vas a recibir:
-    - El contrato original.
-    - La enmienda.
-    - Un mapa estructurado de ambos documentos.
+Vas a recibir:
+- El contrato original.
+- La enmienda.
+- Un mapa estructurado de ambos documentos.
 
-    Tu tarea consiste exclusivamente en identificar todos los cambios introducidos por la enmienda.
+Tu tarea consiste exclusivamente en identificar todos los cambios introducidos por la enmienda.
 
-    Para cada diferencia, determiná si corresponde a:
-    - Una adición.
-    - Una eliminación.
-    - Una modificación.
+Para cada diferencia, determiná si corresponde a:
+- Una adición.
+- Una eliminación.
+- Una modificación.
 
-    Utilizá el mapa estructurado únicamente como contexto para comprender qué secciones se corresponden entre sí.
+Utilizá el mapa estructurado únicamente como contexto para comprender qué secciones se corresponden entre sí.
 
-    Respondé únicamente con un objeto JSON que contenga exactamente los siguientes campos:
+Respondé únicamente con un objeto JSON que contenga exactamente los siguientes campos:
 
-    {
-    "sections_changed": [
-        "..."
-    ],
-    "topics_touched": [
-        "..."
-    ],
-    "summary_of_the_change": "..."
-    }
+"sections_changed": [
+"..."
+],
+"topics_touched": [
+"..."
+],
+"summary_of_the_change": "..."
 
-    No agregues texto antes ni después del JSON.
-    """.strip()
+No agregues texto antes ni después del JSON.
+""".strip()
 
 extraction_prompt = ChatPromptTemplate.from_messages(
     [
@@ -91,7 +89,7 @@ def extraction_node(state: ContractAnalysisState) -> dict :
             "amendment_context": state["amendment_context"],
         }
     )
-
+    
     return {
         "validated_output": response,
     }
