@@ -24,12 +24,8 @@ Utilizá el mapa estructurado únicamente como contexto para comprender qué sec
 
 Respondé únicamente con un objeto JSON que contenga exactamente los siguientes campos:
 
-"sections_changed": [
-"..."
-],
-"topics_touched": [
-"..."
-],
+"sections_changed": ["..."],
+"topics_touched": ["..."],
 "summary_of_the_change": "..."
 
 No agregues texto antes ni después del JSON.

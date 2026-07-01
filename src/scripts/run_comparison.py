@@ -2,6 +2,7 @@ from pathlib import Path
 import argparse
 
 from src.utils.graph_builder import build_img_graph
+from src.utils.prints import *
 
 def main():
     parser = argparse.ArgumentParser()
@@ -11,6 +12,40 @@ def main():
 
     args = parser.parse_args()
 
+    # Paso 1: Carga los archivos
+    
+    file1, file2 = get_file_names(parser, args)
+
+    # Paso 2: Construye el grafo
+    
+    print_header("CREANDO GRAFO...")
+    
+    chain = build_img_graph()
+    
+    print_success("Grafo finalizado correctamente")
+    
+    # Paso 3: 
+    print_header("Ejecutando al Agente Autónomo de Comparación de Contratos...")
+
+    result = chain.invoke(
+        {
+            "contract_image_path": file1,
+            "amendment_image_path": file2,
+            "contract_text": "",
+            "amendment_text": "",
+            "contract_context": "",
+            "amendment_context": "",
+            "validated_output": None,
+        }
+    )
+
+    print_success("Agente ejecutado correctamente")
+
+    final_result = result["validated_output"] 
+
+    print_contract_change_output(final_result)
+
+def get_file_names(parser, args):
     base_dir = Path("contracts")
 
     file1 = base_dir / args.file1
@@ -27,39 +62,7 @@ def main():
     print(f" Primer archivo cargado exitosamente:\t '{args.file1}'")
     print(f"Segundo archivo cargado exitosamente:\t '{args.file2}'")
 
-    chain = build_img_graph()
-
-    result = chain.invoke(
-        {
-            "contract_image_path": file1,
-            "amendment_image_path": file2,
-            "contract_text": "",
-            "amendment_text": "",
-            "contract_context": "",
-            "amendment_context": "",
-            "validated_output": None,
-        }
-    )
-
-    print("##### CONTRATO #####")
-    
-    print(result["contract_text"] + '\n')
-
-    print("##### ENMIENDA #####")
-
-    print(result["amendment_text"]  + '\n')
-
-    print("##### CONTEXTUALIZACIÓN CONTRATO #####")
-    
-    print(result["contract_context"]  + '\n')
-
-    print("##### CONTEXTUALIZACIÓN ENMIENDA #####")
-    
-    print(result["amendment_context"]  + '\n')
-
-    # print("##### EXTRACTOR #####")
-
-    # print(result["validated_output"]  + '\n')
+    return file1,file2
 
 if __name__ == "__main__":
     main()

@@ -61,12 +61,6 @@ def build_img_graph():
     for node_name, node_fn in NODES_IMG.items(): 
             graph.add_node(node_name, node_fn)
 
-    '''graph.add_edge(START, "parser_img")
-    graph.add_edge("parser_img", "contextualizer")
-    graph.add_edge("contextualizer", END)'''
-
-
-    
     graph.add_edge(START, "parser_img")
     graph.add_edge("parser_img", "contextualizer")
     graph.add_edge("contextualizer", "extractor")
