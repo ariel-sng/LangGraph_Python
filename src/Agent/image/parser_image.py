@@ -3,7 +3,7 @@ from typing import TypedDict
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
-from src.models.image_state import ContractAnalysisState
+from src.states.image_state import ContractAnalysisState
 
 llm = ChatOpenAI(
     model="gpt-4o",

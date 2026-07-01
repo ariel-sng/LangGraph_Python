@@ -2,7 +2,7 @@
 from typing import cast
 
 from langfuse.langchain import CallbackHandler
-from src.models.state import AgentState
+from src.states.state import AgentState
 from src.utils.graph_builder import build_graph
 from src.agent import evaluate
 

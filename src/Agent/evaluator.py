@@ -3,10 +3,10 @@ from typing import cast
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-from src.models.state import AgentState
-from src.models.evaluator_result import EvaluationResult
+from src.states.state import AgentState
+from src.states.evaluator_result import EvaluationResult
 from src.config.settings import Settings
-from src.models.route_enum import Route
+from src.states.route_enum import Route
 
 
 prompt = ChatPromptTemplate.from_messages(

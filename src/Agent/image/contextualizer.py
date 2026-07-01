@@ -1,7 +1,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
-from src.models.image_state import ContractAnalysisState
+from src.states.image_state import ContractAnalysisState
 
 CONTEXTUALIZATION_PROMPT = """
 Sos un asistente especializado en el análisis de documentos legales.

@@ -1,7 +1,7 @@
 from typing import Any
 
 from src.RAG.retrieve import retrieve_chunks
-from src.models.state import AgentState
+from src.states.state import AgentState
 
 def finance_node(state: AgentState) -> dict[str, Any]:
 

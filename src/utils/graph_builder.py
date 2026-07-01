@@ -1,11 +1,11 @@
 from langgraph.graph import StateGraph, START, END
 
 # RAG - PI3
-from src.models.state import AgentState
+from src.states.state import AgentState
 from src.agent import NODES_RAG, NODES, orchestrator_node, router, answer_node
 
 # Contratos - PI4
-from src.models.image_state import ContractAnalysisState
+from src.states.image_state import ContractAnalysisState
 from src.agent import NODES_IMG
 
 
