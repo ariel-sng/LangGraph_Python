@@ -20,7 +20,7 @@ def main():
         if not path.is_file()
     ]
     if missing:
-        parser.error(f"El/los siguiente(s) archivo(s) no existen: {', '.join(missing)}")
+        parser.error("El/los siguiente(s) archivo(s) no existen:\n" + "\n".join(missing))
 
     print(f"Primer archivo: {args.file1}")
     print(f"Segundo archivo: {args.file2}")
