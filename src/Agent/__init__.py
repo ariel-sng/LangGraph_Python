@@ -7,6 +7,8 @@ from .orchestrator import orchestrator_node, router
 from .answer import answer_node
 from .evaluator import evaluate
 from .image.parser_image import parse_contract_images_node
+from .image.contextualizer import contextualization_node
+
 
 NODES_RAG = {
     "legal": legal_node,
@@ -15,8 +17,9 @@ NODES_RAG = {
     "hr": hr_node,
 }
 
-NODE_IMG = {
-    "parser_img": parse_contract_images_node
+NODES_IMG = {
+    "parser_img": parse_contract_images_node,
+    "contextualizer": contextualization_node
 }
 
 NODES = {

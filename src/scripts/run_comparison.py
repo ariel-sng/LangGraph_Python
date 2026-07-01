@@ -1,7 +1,7 @@
 from pathlib import Path
 import argparse
 
-from src.utils.graph_builder import build_img_chain
+from src.utils.graph_builder import build_img_graph
 
 def main():
     parser = argparse.ArgumentParser()
@@ -27,7 +27,7 @@ def main():
     print(f" Primer archivo cargado exitosamente:\t '{args.file1}'")
     print(f"Segundo archivo cargado exitosamente:\t '{args.file2}'")
 
-    chain = build_img_chain()
+    chain = build_img_graph()
 
     result = chain.invoke(
         {
@@ -35,18 +35,27 @@ def main():
             "amendment_image_path": file2,
             "contract_text": "",
             "amendment_text": "",
-            "contextual_map": "",
+            "contract_context": "",
+            "amendment_context": "",
+            "extraction_result": {}
         }
     )
 
-    print("##### PRIMER  CONTRATO #####")
+    print("##### CONTRATO #####")
     
-    print(result["contract_text"])
-    
-    
-    print("##### SEGUNDO CONTRATO #####")
+    print(result["contract_text"] + '\n')
 
-    print(result["amendment_text"])
+    print("##### ENMIENDA #####")
+
+    print(result["amendment_text"]  + '\n')
+
+    print("##### CONTEXTUALIZACIÓN CONTRATO #####")
+    
+    print(result["contract_context"]  + '\n')
+
+    print("##### CONTEXTUALIZACIÓN ENMIENDA #####")
+    
+    print(result["amendment_context"]  + '\n')
 
 if __name__ == "__main__":
     main()

@@ -6,7 +6,7 @@ from src.agent import NODES_RAG, NODES, orchestrator_node, router, answer_node
 
 # Contratos - PI4
 from src.models.image_state import ContractAnalysisState
-from src.agent import NODE_IMG
+from src.agent import NODES_IMG
 
 
 # Diagrama de formato del grafo del RAG:
@@ -54,12 +54,15 @@ def build_graph():
     graph_builder.add_edge("unknown", END)
     return graph_builder
 
-def build_img_chain():
+def build_img_graph():
     graph = StateGraph(ContractAnalysisState)
 
-    graph.add_node("parse_contract_images", NODE_IMG["parser_img"])
+    #graph.add_node("parse_contract_images", NODES_IMG["parser_img"])
+    for node_name, node_fn in NODES_IMG.items(): 
+            graph.add_node(node_name, node_fn)
 
-    graph.add_edge(START, "parse_contract_images")
-    graph.add_edge("parse_contract_images", END)
+    graph.add_edge(START, "parser_img")
+    graph.add_edge("parser_img", "contextualizer")
+    graph.add_edge("contextualizer", END)
 
     return graph.compile()
