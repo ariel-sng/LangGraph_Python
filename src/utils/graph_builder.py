@@ -1,10 +1,15 @@
 from langgraph.graph import StateGraph, START, END
 
+# RAG - PI3
 from src.models.state import AgentState
 from src.agent import NODES_RAG, NODES, orchestrator_node, router, answer_node
 
+# Contratos - PI4
+from src.models.image_state import ContractAnalysisState
+from src.agent import NODE_IMG
 
-# Diagrama de formato del grafo:
+
+# Diagrama de formato del grafo del RAG:
 #
 #
 #                               +--->   [HR]  -----+
@@ -48,3 +53,13 @@ def build_graph():
     graph_builder.add_edge("answer", END)
     graph_builder.add_edge("unknown", END)
     return graph_builder
+
+def build_img_chain():
+    graph = StateGraph(ContractAnalysisState)
+
+    graph.add_node("parse_contract_images", NODE_IMG["parser_img"])
+
+    graph.add_edge(START, "parse_contract_images")
+    graph.add_edge("parse_contract_images", END)
+
+    return graph.compile()
