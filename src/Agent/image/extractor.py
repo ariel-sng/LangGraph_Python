@@ -4,6 +4,8 @@ from langchain_openai import ChatOpenAI
 from src.states.image_state import ContractAnalysisState
 from src.models.contract_change_output import ContractChangeOutput
 
+from src.observability.langfuse import langfuse 
+
 
 EXTRACTOR_PROMPT = """
 Sos un asistente especializado en el análisis comparativo de documentos legales.
@@ -77,15 +79,27 @@ extraction_chain = extraction_prompt | structured_llm
 
 
 def extraction_node(state: ContractAnalysisState) -> dict :
-    response = extraction_chain.invoke(
-        {
-            "contract": state["contract_text"],
-            "contract_context": state["contract_context"],
-            "amendment": state["amendment_text"],
-            "amendment_context": state["amendment_context"],
-        }
-    )
+    with langfuse.start_as_current_observation(
+        as_type="span",
+        name="extraction_agent",
+    ) as span:    
+
+        response = extraction_chain.invoke(
+            {
+                "contract": state["contract_text"],
+                "contract_context": state["contract_context"],
+                "amendment": state["amendment_text"],
+                "amendment_context": state["amendment_context"],
+            }
+        )
     
+        span.update(
+            input={
+                ...
+            },
+            output=response.model_dump()
+        )
+        
     return {
         "validated_output": response,
     }

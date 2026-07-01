@@ -1,6 +1,7 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
+from src.observability.langfuse import langfuse 
 from src.states.image_state import ContractAnalysisState
 
 CONTEXTUALIZATION_PROMPT = """
@@ -58,10 +59,34 @@ def contextualization_agent(document):
 
 
 def contextualization_node(state: ContractAnalysisState) -> dict:
-    contract_context = contextualization_agent(state["contract_text"])
-    amendment_context = contextualization_agent(state["amendment_text"])
+    with langfuse.start_as_current_observation(
+        as_type="span",
+        name="contextualize_contract",
+    ) as span_contract:
+        
+        contract_context = contextualization_agent(state["contract_text"])
+        
+        register_contextualization(state["contract_text"], span_contract, contract_context)
+
+    with langfuse.start_as_current_observation(
+        as_type="span",
+        name="contextualize_amendment",
+    ) as span_amendment:  
+        amendment_context = contextualization_agent(state["amendment_text"])
+        
+        register_contextualization(state["amendment_text"], span_amendment, amendment_context)
 
     return {
         "contract_context": contract_context,
         "amendment_context": amendment_context,
     }
+
+def register_contextualization(contract_text, span_contract, contract_context):
+    span_contract.update(
+            input={
+                "document_length": len(contract_text),
+            },
+            output={
+                "context_length": len(contract_context),
+            },
+        )

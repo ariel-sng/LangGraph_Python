@@ -3,6 +3,7 @@ from typing import TypedDict
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
+from src.observability.langfuse import langfuse 
 from src.states.image_state import ContractAnalysisState
 
 llm = ChatOpenAI(
@@ -53,11 +54,39 @@ def parse_contract_images_node( state: ContractAnalysisState ) -> dict:
     Lee el contrato original y la enmienda y devuelve el texto interpretado por GPT-4o Vision.
     """
 
-    contract_text = _extract_text_from_image(state["contract_image_path"])
+    # Riquísimo como generar spans ensució tanto el código, gracias langfuse :D
 
-    amendment_text = _extract_text_from_image(state["amendment_image_path"])
+    with langfuse.start_as_current_observation(
+        as_type="span",
+        name="parse_original_contract",
+    ) as span_contract:
+        
+        contract_text = _extract_text_from_image(state["contract_image_path"])
+        
+        # Registro path de la imagen y el largo del texto transcripto del contrato
+        register_parser(state["contract_image_path"], span_contract, contract_text)
+
+    with langfuse.start_as_current_observation(
+        as_type="span",
+        name="parse_amendment_contract",
+    ) as span_amendment:
+        
+        amendment_text = _extract_text_from_image(state["amendment_image_path"])
+        
+        # Registro path de la imagen y el largo del texto transcripto de la enmienda
+        register_parser(state["contract_image_path"], span_amendment, amendment_text)
 
     return {
         "contract_text": contract_text,
         "amendment_text": amendment_text,
     }
+
+def register_parser(path, span_contract, contract_text):
+    span_contract.update(
+            input={
+                "image_path": path,
+            },
+            output={
+                "characters_extracted": len(contract_text),
+            }
+        )

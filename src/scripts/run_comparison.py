@@ -4,6 +4,8 @@ import argparse
 from src.utils.graph_builder import build_img_graph
 from src.utils.prints import *
 
+from src.observability.langfuse import *
+
 def main():
     parser = argparse.ArgumentParser()
 
@@ -20,24 +22,31 @@ def main():
     
     print_header("CREANDO GRAFO...")
     
-    chain = build_img_graph()
+    graph = build_img_graph()
     
     print_success("Grafo finalizado correctamente")
     
     # Paso 3: 
     print_header("Ejecutando al Agente Autónomo de Comparación de Contratos...")
-
-    result = chain.invoke(
-        {
-            "contract_image_path": file1,
-            "amendment_image_path": file2,
-            "contract_text": "",
-            "amendment_text": "",
-            "contract_context": "",
-            "amendment_context": "",
-            "validated_output": None,
-        }
-    )
+    
+    with langfuse.start_as_current_observation(
+        as_type="span",
+        name="contract-analysis",
+    ):
+        result = graph.invoke(
+            {
+                "contract_image_path": file1,
+                "amendment_image_path": file2,
+                "contract_text": "",
+                "amendment_text": "",
+                "contract_context": "",
+                "amendment_context": "",
+                "validated_output": None,
+            },
+            config={
+                "callbacks": [langfuse_handler]
+            }
+        )
 
     print_success("Agente ejecutado correctamente")
 
