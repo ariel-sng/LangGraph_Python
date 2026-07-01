@@ -1,28 +1,29 @@
-#!/usr/bin/env -S uv run
-
+from pathlib import Path
 import argparse
 
-
 def main():
-    parser = argparse.ArgumentParser(
-        description="Recibe los nombres de dos archivos por línea de comandos."
-    )
+    parser = argparse.ArgumentParser()
 
-    parser.add_argument(
-        "file1",
-        help="Nombre o ruta del primer archivo.",
-    )
-
-    parser.add_argument(
-        "file2",
-        help="Nombre o ruta del segundo archivo.",
-    )
+    parser.add_argument("file1")
+    parser.add_argument("file2")
 
     args = parser.parse_args()
 
+    base_dir = Path("contracts")
+
+    file1 = base_dir / args.file1
+    file2 = base_dir / args.file2
+
+    missing = [
+        str(path)
+        for path in (file1, file2)
+        if not path.is_file()
+    ]
+    if missing:
+        parser.error(f"El/los siguiente(s) archivo(s) no existen: {', '.join(missing)}")
+
     print(f"Primer archivo: {args.file1}")
     print(f"Segundo archivo: {args.file2}")
-
 
 if __name__ == "__main__":
     main()
