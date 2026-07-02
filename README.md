@@ -1,9 +1,10 @@
 # LangGraph_Python
 
-Sistema multiagente en el que un Agente Orquestador clasifique la intención de la consulta del usuario 
+**Flujo multiagente RAG y comparación de contratos por imagenes**
 
-Este proyecto recibe una consulta, el orquestador decide la ruta y el flujo continúa con un nodo específico:
-`finance`, `hr`, `tech`, `legal` o `unknown`.
+El proyecto incluye dos fases separadas:
+- **PI Nº3**: un flujo RAG multiagente para consultas de texto.
+- **PI Nº4**: un agente de comparación de contratos basado en imágenes que recibe contrato y enmienda.
 
 ---
 
@@ -47,11 +48,13 @@ LANGFUSE_BASE_URL="https://us.cloud.langfuse.com"
 
 ---
 
-## 3. Cómo funciona
+## PI 3 — Multiagente RAG
 
-- `src.Agent.orchestrator` es el nodo central.
+### Cómo funciona
+
+- `src/agent/orchestrator.py` es el nodo central.
 - El orquestador usa un LLM para elegir un dominio.
-- Los agentes de dominio están en `src/Agent` e incluyen: `/finance.py`, `hr.py`, `tech.py`, `legal.py` y `unknown.py`.
+- Los agentes de dominio están en `src/agent` e incluyen: `finance.py`, `hr.py`, `tech.py`, `legal.py` y `unknown.py`.
 - El grafo de ejecución está en `src/utils/graph_builder.py`.
 
 Flujo principal:
@@ -60,61 +63,47 @@ Flujo principal:
 
 Si la consulta no pertenece claramente a un dominio, se enruta a `unknown`.
 
----
-
-## 4. Ejecutar la ingestión
-
-### Qué hace
+### Ejecutar la ingestión
 
 `src/scripts/run_ingest.py` procesa los archivos `documents/*.md` y los divide en chunks para su uso posterior.
-
-### Comando
 
 ```bash
 uv run python -m src.scripts.run_ingest --method fixed --chunk-size 500 --chunk-overlap 100
 ```
 
-### Flags disponibles
-
+Flags disponibles:
 - `--method`: `fixed` o `sentence`.
 - `--chunk-size`: tamaño máximo de chunk en caracteres.
 - `--chunk-overlap`: solapamiento entre chunks (solo para `fixed`).
 
-### Ejemplo
+Ejemplo:
 
 ```bash
 uv run python -m src.scripts.run_ingest --method sentence --chunk-size 500
 ```
 
----
-
-## 5. Ejecutar consultas
-
-### Qué hace
+### Ejecutar consultas
 
 `src/scripts/run_query.py` abre un bucle interactivo que pide preguntas y muestra respuestas del grafo de agentes.
-
-### Comando
 
 ```bash
 uv run python -m src.scripts.run_query
 ```
 
-### Flags disponibles
-
+Flags disponibles:
 - `--no-eval`: omite la ejecución del agente evaluador y muestra solo la respuesta.
 
-### Uso
-
+Uso:
 - Escribe la pregunta.
 - Presiona Enter.
 - Escribe `exit` para finalizar.
 
----
+### Evaluador
 
-## 6. Inspeccionar chunks en ChromaDB
+El evaluador es un componente externo al grafo de LangGraph que se ejecuta una vez finalizado el flujo. Su función es analizar la consulta, el contexto recuperado por el RAG y la respuesta generada para asignar un puntaje y una justificación sobre la calidad del uso del contexto. Si la ruta seleccionada es unknown, evalúa únicamente que la respuesta rechace correctamente una consulta fuera del alcance del sistema.
 
-Para ver los chunks almacenados:
+
+### Inspeccionar chunks en ChromaDB
 
 ```bash
 uv run python -m src.scripts.read_chroma
@@ -122,30 +111,51 @@ uv run python -m src.scripts.read_chroma
 
 ---
 
-## 7. Archivos clave
+## PI 4 — Comparación de contratos con LangGraph
+
+### Qué hace
+
+Este módulo recibe dos documentos: un contrato y una enmienda.
+
+El flujo hace lo siguiente:
+- El primer nodo parsea las imágenes y extrae el texto de cada documento,
+- El segundo nodo genera un mapa conceptual/estructura del contrato y de la enmienda por separado,
+- El tercer nodo identifica y devuelve las diferencias entre ambos.
+
+Todo esto se ejecuta con LangGraph.
+
+### Ejecutar comparación
+
+```bash
+uv run -m src.scripts.run_comparison contrato enmienda
+```
+
+Donde `contrato` y `enmienda` son los nombres de los documentos dentro de `contracts/`, específicamente deben ser imágenes.
+
+---
+
+## Archivos clave
 
 - `src/config/settings.py`: carga `.env`.
-- `src/utils/graph_builder.py`: construye el grafo y las rutas.
-- `src/Agent/orchestrator.py`: toma la decisión de ruta.
-- `src/Agent/finance.py`, `hr.py`, `tech.py`, `legal.py`, `unknown.py`: agentes de dominio.
+- `src/utils/graph_builder.py`: construye el grafo.
+####  PI 3
+- `src/agent/orchestrator.py`: toma la decisión de ruta.
+- `src/agent/finance.py`, `hr.py`, `tech.py`, `legal.py`, `unknown.py`: agentes de dominio.
 - `src/scripts/run_ingest.py`: ingestión de documentos.
-- `src/scripts/run_query.py`: consulta interactiva.
 - `src/scripts/read_chroma.py`: muestra los chunks guardados.
+- `src/scripts/run_query.py`: consulta interactiva.
+#### PI 4
+- - `src/agent/image/parser_image.py`, `contextualizer.py`, `extractor.py`: agentes de dominio.
+- `src/scripts/run_comparison.py`: ejecuta el agente de comparación de contratos de PI 4.
 
 ---
 
-## 8. Evaluador
+## Dependencias principales
 
-El evaluador es un componente externo al grafo de LangGraph que se ejecuta una vez finalizado el flujo. Su función es analizar la consulta, el contexto recuperado por el RAG y la respuesta generada para asignar un puntaje y una justificación sobre la calidad del uso del contexto. Si la ruta seleccionada es unknown, evalúa únicamente que la respuesta rechace correctamente una consulta fuera del alcance del sistema.
-
----
-
-## 9. Dependencias principales
-
-Las dependencias del proyecto están en `pyproject.toml` y incluyen:
+Las dependencias principales del proyecto están en `pyproject.toml` y incluyen:
 
 - `chromadb`
-- `langchain`, `langchain-chroma`, `langchain-openai`, `langchain-text-splitters`, `langchain-community`
+- `langchain`
 - `langfuse`
 - `openai`
 - `python-dotenv`
