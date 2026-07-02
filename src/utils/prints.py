@@ -16,6 +16,15 @@ def print_success(message: str = "Proceso finalizado correctamente.") -> None:
     print(f"│ ☑ {message:<{width - 3}}│")
     print(f"└{'─' * width}┘")
 
+
+def print_error(message: str = "Se produjo un error.") -> None:
+    width = 66
+
+    print(f"┌{'─' * width}┐")
+    print(f"│ ⚠ {message:<{width - 3}}│")
+    print(f"└{'─' * width}┘")
+
+
 def print_contract_change_output(output: ContractChangeOutput) -> None:
     print("=" * 35)
     print("")

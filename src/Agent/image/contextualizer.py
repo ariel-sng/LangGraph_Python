@@ -1,8 +1,10 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 
+from src.config.settings import Settings
 from src.observability.langfuse import langfuse 
 from src.states.image_state import ContractAnalysisState
+from src.utils.llm_chain import invoke_chain_with_error_handling
 
 CONTEXTUALIZATION_PROMPT = """
 Sos un asistente especializado en el análisis de documentos legales.
@@ -43,6 +45,8 @@ contextualization_prompt = ChatPromptTemplate.from_messages(
 llm = ChatOpenAI(
     model="gpt-4o",
     temperature=0,
+    timeout=Settings.OPENAI_API_TIMEOUT,
+    max_completion_tokens=Settings.MAX_PROMPT_TOKENS,
 )
 
 contextualization_chain = contextualization_prompt | llm
@@ -50,10 +54,12 @@ contextualization_chain = contextualization_prompt | llm
 
 def contextualization_agent(document):
     '''Recibe un contrato/enmienda y devuelve un mapa estructural del documento'''
-    response = contextualization_chain.invoke(
+    response = invoke_chain_with_error_handling(
+        contextualization_chain,
         {
             "document": document,
-        }
+        },
+        error_context="contextualization_chain",
     )
     return response.content
 

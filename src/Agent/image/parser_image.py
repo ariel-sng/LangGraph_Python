@@ -3,12 +3,16 @@ from typing import TypedDict
 
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import HumanMessage
+from src.config.settings import Settings
 from src.observability.langfuse import langfuse 
 from src.states.image_state import ContractAnalysisState
+from src.utils.llm_chain import invoke_chain_with_error_handling
 
 llm = ChatOpenAI(
     model="gpt-4o",
     temperature=0,
+    timeout=Settings.OPENAI_API_TIMEOUT,
+    max_completion_tokens=Settings.MAX_PROMPT_TOKENS,
 )
 
 VISION_PROMPT = """
@@ -26,9 +30,16 @@ Instrucciones:
 """.strip()
 
 def _extract_text_from_image(image_path):
-    
-    with open(image_path, "rb") as f:
-        image_b64 = base64.b64encode(f.read()).decode("utf-8")
+    try:
+        with open(image_path, "rb") as f:
+            raw_image = f.read()
+    except OSError as exc:
+        raise RuntimeError(f"No se puede abrir la imagen '{image_path}': {exc}") from exc
+
+    try:
+        image_b64 = base64.b64encode(raw_image).decode("utf-8")
+    except Exception as exc:
+        raise RuntimeError(f"No se pudo codificar la imagen '{image_path}' en base64.") from exc
 
     message = HumanMessage(
         content=[
@@ -45,7 +56,11 @@ def _extract_text_from_image(image_path):
         ]
     )
 
-    response = llm.invoke([message])
+    response = invoke_chain_with_error_handling(
+        llm,
+        [message],
+        error_context=f"vision_model para '{image_path}'",
+    )
     return response.content
 
 
