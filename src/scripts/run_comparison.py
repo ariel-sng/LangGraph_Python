@@ -90,11 +90,13 @@ def main():
                     [langfuse_handler],
                 )
             except Exception as exc:
+                err = str(exc)
+                print_error(f"Error en el grafo: {err}")
                 root_span.update(
                     output={
                         "status": "error",
                         "step": "invoke_graph_with_retries",
-                        "message": str(exc),
+                        "message": err,
                     }
                 )
                 raise
