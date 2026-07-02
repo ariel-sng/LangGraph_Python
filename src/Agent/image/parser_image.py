@@ -56,6 +56,7 @@ def parse_contract_images_node( state: ContractAnalysisState ) -> dict:
 
     # Riquísimo como generar spans ensució tanto el código, gracias langfuse :D
 
+    #### CONTRATO ####
     with langfuse.start_as_current_observation(
         as_type="span",
         name="parse_original_contract",
@@ -66,6 +67,8 @@ def parse_contract_images_node( state: ContractAnalysisState ) -> dict:
         # Registro path de la imagen y el largo del texto transcripto del contrato
         register_parser(state["contract_image_path"], span_contract, contract_text)
 
+
+    #### ENMIENDA ####
     with langfuse.start_as_current_observation(
         as_type="span",
         name="parse_amendment_contract",
@@ -74,7 +77,7 @@ def parse_contract_images_node( state: ContractAnalysisState ) -> dict:
         amendment_text = _extract_text_from_image(state["amendment_image_path"])
         
         # Registro path de la imagen y el largo del texto transcripto de la enmienda
-        register_parser(state["contract_image_path"], span_amendment, amendment_text)
+        register_parser(state["amendment_image_path"], span_amendment, amendment_text)
 
     return {
         "contract_text": contract_text,

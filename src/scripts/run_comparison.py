@@ -29,10 +29,12 @@ def main():
     # Paso 3: 
     print_header("Ejecutando al Agente Autónomo de Comparación de Contratos...")
     
+    # Agrego trazabilidad con un span en la raíz del grafo
     with langfuse.start_as_current_observation(
         as_type="span",
         name="contract-analysis",
-    ):
+    ) as root_span:
+        
         result = graph.invoke(
             {
                 "contract_image_path": file1,
@@ -46,6 +48,14 @@ def main():
             config={
                 "callbacks": [langfuse_handler]
             }
+        )
+
+        root_span.update(
+            input = {
+                "contract_image_path": file1,
+                "amendment_image_path": file2,
+            }, 
+            output = result["validated_output"].model_dump()
         )
 
     print_success("Agente ejecutado correctamente")

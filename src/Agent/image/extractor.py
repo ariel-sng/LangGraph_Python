@@ -94,9 +94,7 @@ def extraction_node(state: ContractAnalysisState) -> dict :
         )
     
         span.update(
-            input={
-                ...
-            },
+            input=state,
             output=response.model_dump()
         )
         
