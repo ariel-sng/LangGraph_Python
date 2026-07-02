@@ -7,6 +7,7 @@ from openai import APIConnectionError, APIError, APITimeoutError, BadRequestErro
 
 from src.config.settings import Settings
 from src.utils.graph_builder import build_img_graph
+from src.utils.jsonl_storage import append_jsonl_record
 from src.utils.prints import *
 
 from src.observability.langfuse import *
@@ -111,7 +112,16 @@ def main():
         sys.exit(1)
     print_success("Agente ejecutado correctamente")
 
-    final_result = result["validated_output"] 
+    final_result = result["validated_output"]
+
+    output_path = append_jsonl_record(
+        record={
+            "contract_image_path": str(file1),
+            "amendment_image_path": str(file2),
+            "result": serialized_output,
+        }
+    )
+    print_success(f"Resultado guardado en: {output_path}")
 
     print_contract_change_output(final_result)
 

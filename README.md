@@ -132,6 +132,8 @@ uv run -m src.scripts.run_comparison contrato enmienda
 
 Donde `contrato` y `enmienda` son los nombres de los documentos dentro de `contracts/`, específicamente deben ser imágenes.
 
+Cada ejecución guarda la salida serializada en `storage/PI4/pi4_results.jsonl` con un registro por línea y la fecha UTC de guardado.
+
 ---
 
 ## Archivos clave
