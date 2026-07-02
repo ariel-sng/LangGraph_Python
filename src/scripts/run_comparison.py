@@ -58,7 +58,7 @@ def main():
     
     print_success("Grafo finalizado correctamente")
     
-    # Paso 3: 
+    # Paso 3:  Ejecuto el grafo
     print_header("Ejecutando al Agente Autónomo de Comparación de Contratos...")
     
     try:
@@ -67,34 +67,46 @@ def main():
             as_type="span",
             name="contract-analysis",
         ) as root_span:
-            result = invoke_graph_with_retries(
-                graph,
-                {
-                    "contract_image_path": file1,
-                    "amendment_image_path": file2,
-                    "contract_text": "",
-                    "amendment_text": "",
-                    "contract_context": "",
-                    "amendment_context": "",
-                    "validated_output": None,
-                },
-                [langfuse_handler],
-            )
-
-            validated_output = result["validated_output"]
-            serialized_output = validated_output.model_dump()
-
+            
             root_span.update(
                 input={
                     "contract_image_path": file1,
                     "amendment_image_path": file2,
-                },
-                output=serialized_output,
+                }
             )
+
+            try:
+                result = invoke_graph_with_retries(
+                    graph,
+                    {
+                        "contract_image_path": file1,
+                        "amendment_image_path": file2,
+                        "contract_text": "",
+                        "amendment_text": "",
+                        "contract_context": "",
+                        "amendment_context": "",
+                        "validated_output": None,
+                    },
+                    [langfuse_handler],
+                )
+            except Exception as exc:
+                root_span.update(
+                    output={
+                        "status": "error",
+                        "step": "invoke_graph_with_retries",
+                        "message": str(exc),
+                    }
+                )
+                raise
+
+            validated_output = result["validated_output"]
+            serialized_output = validated_output.model_dump()
+
+            root_span.update(output=serialized_output)
+
     except Exception as exc:
         print_error(f"Error inesperado: {exc}")
         sys.exit(1)
-
     print_success("Agente ejecutado correctamente")
 
     final_result = result["validated_output"] 
